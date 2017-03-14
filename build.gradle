@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:1.5.2.RELEASE"
+    compile "org.springframework.cloud:spring-cloud-config-server:1.2.3.RELEASE"
+    compile "org.springframework.cloud:spring-cloud-starter-config:1.2.3.RELEASE"
+    /*compile "org.springframework.cloud:spring-cloud-context:1.1.7.RELEASE"*/
+}
+
+task bootRunConfig(type: org.springframework.boot.gradle.run.BootRunTask.class) {
+    main = 'foo.config.server.ConfigServer'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task bootRunApp(type: org.springframework.boot.gradle.run.BootRunTask.class) {
+    main = 'foo.app.starter.Application'
+    classpath = sourceSets.main.runtimeClasspath
+}
